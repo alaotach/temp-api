@@ -13,6 +13,7 @@ export default function AddWidgetModal({
 }) {
   const [name, setName] = useState("");
   const [url, setUrl] = useState("");
+  const [apiKey, setApiKey] = useState("");
   const [interval, setInterval] = useState(30);
   const [type, setType] = useState("card");
   const [apiResult, setApiResult] = useState(null);
@@ -33,6 +34,7 @@ export default function AddWidgetModal({
     if (mode === "edit" && initialData) {
       setName(initialData.name);
       setUrl(initialData.url);
+      setApiKey(initialData.apiKey || "");
       setInterval(initialData.interval);
       setType(initialData.type);
 
@@ -44,7 +46,7 @@ export default function AddWidgetModal({
 
       // Auto-test API in edit mode
       if (initialData.url) {
-        validateApi(initialData.url).then(setApiResult);
+        validateApi(initialData.url, initialData.apiKey).then(setApiResult);
       }
     }
   }, [mode, initialData]);
@@ -60,7 +62,7 @@ export default function AddWidgetModal({
 
   /* Test API */
   async function testApi() {
-    const result = await validateApi(url);
+    const result = await validateApi(url, apiKey);
     setApiResult(result);
 
     // Reset selections
@@ -104,6 +106,7 @@ export default function AddWidgetModal({
       id: initialData?.id ?? crypto.randomUUID(),
       name,
       url,
+      apiKey,
       interval,
       type,
     };
@@ -151,6 +154,8 @@ export default function AddWidgetModal({
             setName={setName}
             url={url}
             setUrl={setUrl}
+            apiKey={apiKey}
+            setApiKey={setApiKey}
             interval={interval}
             setInterval={setInterval}
             onTest={testApi}

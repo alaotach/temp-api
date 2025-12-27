@@ -440,7 +440,7 @@ function debugError(...args) {
 }
 
 export default function ChartWidget({ widget, dragListeners, onEdit, onDelete }) {
-  const { name, url, interval, seriesPath, yField } = widget;
+  const { name, url, apiKey, interval, seriesPath, yField } = widget;
 
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
@@ -458,7 +458,7 @@ export default function ChartWidget({ widget, dragListeners, onEdit, onDelete })
       setLoading(true);
       setError(null);
 
-      const json = await fetchApi(url);
+      const json = await fetchApi(url, apiKey);
 
       debugLog("=== CHART LOAD DEBUG ===");
       debugLog("Widget config:", { seriesPath, yField });

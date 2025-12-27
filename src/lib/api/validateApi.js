@@ -562,9 +562,9 @@ export function getAllPaths(obj, prefix = '', maxDepth = 5, currentDepth = 0) {
 /**
  * Enhanced validateApi - Returns EXACT paths that work
  */
-export async function validateApi(url) {
+export async function validateApi(url, apiKey = null) {
   try {
-    const headers = getHeadersForApi(url);
+    const headers = getHeadersForApi(url, apiKey);
     const res = await fetch(url, { headers });
 
     if (!res.ok) {

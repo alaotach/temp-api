@@ -674,7 +674,7 @@ import { fetchApi } from "@/lib/api/fetchApi";
 import { readPath } from "@/lib/api/validateApi";
 
 export default function TableWidget({ widget, dragListeners, onEdit, onDelete }) {
-  const { name, url, interval, arrayPath, tableFields = [] } = widget;
+  const { name, url, apiKey, interval, arrayPath, tableFields = [] } = widget;
   const ROWS_PER_PAGE = 10;
 
   const [rows, setRows] = useState([]);
@@ -690,7 +690,7 @@ export default function TableWidget({ widget, dragListeners, onEdit, onDelete })
       setLoading(true);
       setError(null);
 
-      const json = await fetchApi(url);
+      const json = await fetchApi(url, apiKey);
       const data = readPath(json, arrayPath);
 
       if (!Array.isArray(data)) {

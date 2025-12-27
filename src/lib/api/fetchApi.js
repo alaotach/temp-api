@@ -1,8 +1,8 @@
 // Your version (correct):
 import { getHeadersForApi } from "./apiConfig";
 
-export async function fetchApi(url) {
-  const headers = getHeadersForApi(url);
+export async function fetchApi(url, apiKey = null) {
+  const headers = getHeadersForApi(url, apiKey);
   const res = await fetch(url, { headers });
 
   if (!res.ok) {

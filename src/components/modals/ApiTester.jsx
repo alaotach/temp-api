@@ -6,6 +6,8 @@ export default function ApiTester({
   setName,
   url,
   setUrl,
+  apiKey,
+  setApiKey,
   interval,
   setInterval,
   onTest,
@@ -68,6 +70,23 @@ export default function ApiTester({
             {loading ? "Testing..." : "Test API"}
           </button>
         </div>
+      </div>
+
+      {/* API Key */}
+      <div>
+        <label className="block text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">
+          API Key (optional)
+        </label>
+        <input
+          type="password"
+          value={apiKey}
+          onChange={(e) => setApiKey(e.target.value)}
+          placeholder="Enter API key if required"
+          className="w-full px-3 py-2 rounded-md border bg-white text-slate-900 dark:bg-slate-800 dark:text-slate-100 dark:border-slate-700 focus:ring-2 focus:ring-emerald-500 outline-none"
+        />
+        <p className="text-xs text-slate-500 mt-1">
+          API key will be sent in the X-Api-Key header
+        </p>
       </div>
 
       {/* Status Messages */}

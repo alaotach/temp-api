@@ -315,7 +315,7 @@ import { fetchApi } from "@/lib/api/fetchApi";
 import { readPath } from "@/lib/api/validateApi";
 
 export default function CardWidget({ widget, dragListeners, onDelete, onEdit }) {
-  const { name, url, interval, cardFields = [] } = widget;
+  const { name, url, apiKey, interval, cardFields = [] } = widget;
 
   const [rawData, setRawData] = useState(null);
   const [error, setError] = useState(null);
@@ -327,7 +327,7 @@ export default function CardWidget({ widget, dragListeners, onDelete, onEdit }) 
     try {
       setLoading(true);
       setError(null);
-      const json = await fetchApi(url);
+      const json = await fetchApi(url, apiKey);
       setRawData(json);
       setLastUpdated(new Date());
       setIsInitialLoad(false);
