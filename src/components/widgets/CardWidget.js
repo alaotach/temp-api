@@ -363,7 +363,7 @@ export default function CardWidget({ widget, dragListeners, onDelete, onEdit }) 
   return (
     <div
       {...dragListeners}
-      className="relative rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-5 shadow-sm hover:shadow-md transition-shadow cursor-grab active:cursor-grabbing"
+      className="relative w-full h-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-5 shadow-sm hover:shadow-md transition-shadow cursor-grab active:cursor-grabbing flex flex-col"
     >
       {/* Updating badge */}
       {loading && !isInitialLoad && (
@@ -407,7 +407,7 @@ export default function CardWidget({ widget, dragListeners, onDelete, onEdit }) 
       </div>
 
       {/* Content */}
-      <div className="space-y-2">
+      <div className="space-y-2 flex-1 overflow-y-auto min-h-0">
         {error && (
           <div className="text-sm text-red-500 bg-red-50 p-2 rounded">
             {error}
