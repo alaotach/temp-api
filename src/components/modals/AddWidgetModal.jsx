@@ -14,6 +14,8 @@ export default function AddWidgetModal({
   const [name, setName] = useState("");
   const [url, setUrl] = useState("");
   const [apiKey, setApiKey] = useState("");
+  const [apiKeyHeader, setApiKeyHeader] = useState("X-Api-Key");
+  const [apiKeyPrefix, setApiKeyPrefix] = useState("");
   const [interval, setInterval] = useState(30);
   const [type, setType] = useState("card");
   const [apiResult, setApiResult] = useState(null);
@@ -35,6 +37,8 @@ export default function AddWidgetModal({
       setName(initialData.name);
       setUrl(initialData.url);
       setApiKey(initialData.apiKey || "");
+      setApiKeyHeader(initialData.apiKeyHeader || "X-Api-Key");
+      setApiKeyPrefix(initialData.apiKeyPrefix || "");
       setInterval(initialData.interval);
       setType(initialData.type);
 
@@ -46,7 +50,7 @@ export default function AddWidgetModal({
 
       // Auto-test API in edit mode
       if (initialData.url) {
-        validateApi(initialData.url, initialData.apiKey).then(setApiResult);
+        validateApi(initialData.url, initialData.apiKey, initialData.apiKeyHeader, initialData.apiKeyPrefix).then(setApiResult);
       }
     }
   }, [mode, initialData]);
@@ -62,7 +66,7 @@ export default function AddWidgetModal({
 
   /* Test API */
   async function testApi() {
-    const result = await validateApi(url, apiKey);
+    const result = await validateApi(url, apiKey, apiKeyHeader, apiKeyPrefix);
     setApiResult(result);
 
     // Reset selections
@@ -107,6 +111,8 @@ export default function AddWidgetModal({
       name,
       url,
       apiKey,
+      apiKeyHeader,
+      apiKeyPrefix,
       interval,
       type,
     };
@@ -156,6 +162,10 @@ export default function AddWidgetModal({
             setUrl={setUrl}
             apiKey={apiKey}
             setApiKey={setApiKey}
+            apiKeyHeader={apiKeyHeader}
+            setApiKeyHeader={setApiKeyHeader}
+            apiKeyPrefix={apiKeyPrefix}
+            setApiKeyPrefix={setApiKeyPrefix}
             interval={interval}
             setInterval={setInterval}
             onTest={testApi}

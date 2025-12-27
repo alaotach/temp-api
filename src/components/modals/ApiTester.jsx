@@ -8,6 +8,10 @@ export default function ApiTester({
   setUrl,
   apiKey,
   setApiKey,
+  apiKeyHeader,
+  setApiKeyHeader,
+  apiKeyPrefix,
+  setApiKeyPrefix,
   interval,
   setInterval,
   onTest,
@@ -85,7 +89,41 @@ export default function ApiTester({
           className="w-full px-3 py-2 rounded-md border bg-white text-slate-900 dark:bg-slate-800 dark:text-slate-100 dark:border-slate-700 focus:ring-2 focus:ring-emerald-500 outline-none"
         />
         <p className="text-xs text-slate-500 mt-1">
-          API key will be sent in the X-Api-Key header
+          API key will be sent in the header specified below
+        </p>
+      </div>
+
+      {/* API Key Header */}
+      <div>
+        <label className="block text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">
+          API Key Header Name
+        </label>
+        <input
+          type="text"
+          value={apiKeyHeader}
+          onChange={(e) => setApiKeyHeader(e.target.value)}
+          placeholder="e.g. X-Api-Key, Authorization, apikey"
+          className="w-full px-3 py-2 rounded-md border bg-white text-slate-900 dark:bg-slate-800 dark:text-slate-100 dark:border-slate-700 focus:ring-2 focus:ring-emerald-500 outline-none"
+        />
+        <p className="text-xs text-slate-500 mt-1">
+          Enter the exact header name your API expects (case-sensitive)
+        </p>
+      </div>
+
+      {/* API Key Prefix */}
+      <div>
+        <label className="block text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">
+          API Key Prefix <span className="text-slate-400 font-normal">(optional)</span>
+        </label>
+        <input
+          type="text"
+          value={apiKeyPrefix}
+          onChange={(e) => setApiKeyPrefix(e.target.value)}
+          placeholder="e.g. apikey, Bearer, Basic"
+          className="w-full px-3 py-2 rounded-md border bg-white text-slate-900 dark:bg-slate-800 dark:text-slate-100 dark:border-slate-700 focus:ring-2 focus:ring-emerald-500 outline-none"
+        />
+        <p className="text-xs text-slate-500 mt-1">
+          Prefix before the API key (e.g. "apikey your_key" or "Bearer your_token")
         </p>
       </div>
 
